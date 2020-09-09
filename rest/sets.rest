@@ -1,19 +1,20 @@
-###
-GET http://localhost:3000/api/sets
-
-###
-GET http://localhost:3000/api/sets/1
-
-###
 POST http://localhost:3000/api/sets
 Content-Type: application/json
 
 {
   "name": "New set",
-  "release": 2010,
-  "parts": 396,
+  "release": 2020,
+  "parts": 1000,
   "theme": "Star Wars"
 }
+
+###
+GET http://localhost:3000/api/sets/1
+Accept: application/json
+
+###
+GET http://localhost:3000/api/sets
+Accept: application/json
 
 ###
 PUT http://localhost:3000/api/sets/1
@@ -21,11 +22,13 @@ Content-Type: application/json
 
 {
   "name": "Updated set",
-  "release": 2010,
-  "parts": 396,
+  "release": 2020,
+  "parts": 1000,
   "theme": "Star Wars"
 }
 
 ###
 DELETE http://localhost:3000/api/sets/1
+Accept: application/json
+
 
