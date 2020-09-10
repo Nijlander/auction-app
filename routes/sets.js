@@ -53,7 +53,7 @@ router.get('/api/sets/:id', (req, res) => {
     const set = sets.find(c => c.id === parseInt(req.params.id));
 
     if (!set) {
-        res.status(404).send('The set with the given ID was not found.');
+        res.status(404).send('set with specified id not found');
         return;
     }
 
