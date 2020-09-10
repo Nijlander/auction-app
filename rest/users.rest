@@ -1,0 +1,32 @@
+DELETE http://localhost:3000/api/users/1
+Accept: application/json
+
+###
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+
+{
+  "username": "testaccountupdated",
+  "password": "testpasswordupdated",
+  "email": "rens.development@gmail.com"
+}
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "username": "testaccount",
+  "password": "testpassword",
+  "email": "jrnijland1@gmail.com"
+}
+
+###
+GET http://localhost:3000/api/users/1
+Accept: application/json
+
+###
+GET http://localhost:3000/api/users
+Accept: application/json
+
+###

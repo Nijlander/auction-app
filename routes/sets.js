@@ -72,7 +72,7 @@ router.post('/api/sets', (req, res) => {
     }
 
     const set = {
-        id: sets.length + 1,
+        id: sets[sets.length - 1].id + 1,
         name: value.name,
         release: value.release,
         parts: value.parts,
@@ -116,7 +116,7 @@ router.delete('/api/sets/:id', (req, res) => {
     const set = sets.find(c => c.id === parseInt(req.params.id));
 
     if (!set) {
-        res.status(404).send('The set with the given ID was not found.');
+        res.status(404).send('set with specified id not found');
     }
 
     const index = sets.indexOf(set);
