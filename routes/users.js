@@ -6,27 +6,30 @@ const router = new express.Router();
 const users = [
     {
         id: 1,
-        username: "admin",
-        password: "admin",
-        email: "test@test.test",
+        username: "admin1",
+        password: "password1",
+        email: "jrnijland1@gmail.com",
         currentAuctions: [],
-        soldAuctions: []
+        soldAuctions: [],
+        wonAuctions: []
     },
     {
         isd: 2,
-        username: "admin",
-        password: "admin",
-        email: "test@test.test",
+        username: "admin2",
+        password: "password2",
+        email: "jrnijland1@gmail.com",
         currentAuctions: [],
-        soldAuctions: []
+        soldAuctions: [],
+        wonAuctions: []
     },
     {
         id: 3,
-        username: "admin",
-        password: "admin",
-        email: "test@test.test",
+        username: "admin3",
+        password: "password3",
+        email: "jrnijland1@gmail.com",
         currentAuctions: [],
-        soldAuctions: []
+        soldAuctions: [],
+        wonAuctions: []
     }
 ];
 
@@ -37,7 +40,10 @@ const users = [
 const schema = Joi.object({
     username: Joi.string().required().min(5),
     password: Joi.string().required(),
-    email: Joi.string().required().email()
+    email: Joi.string().required().email(),
+    currentAuctions: Joi.array(),
+    soldAuctions: Joi.array(),
+    wonAuctions: Joi.array()
 });
 
 /**
@@ -77,7 +83,8 @@ router.post('/api/users', (req, res) => {
         password: value.password,
         email: value.email,
         currentAuctions: [],
-        soldAuctions: []
+        soldAuctions: [],
+        wonAuctions: []
     }
 
     users.push(user);
@@ -124,6 +131,25 @@ router.delete('/api/users/:id', (req, res) => {
     users.splice(index, 1);
 
     res.send(user);
+});
+
+/**
+ * route handler for POST /api/login
+ */
+router.post('/api/login', (req, res) => {
+    const user = users.find(c => c.username === req.body.username);
+
+    if (!user) {
+        res.status(404).send('user with the specified username not found');
+        return;
+    }
+
+    if (user.password !== req.body.password) {
+        res.status(401).send('wrong password');
+        return;
+    }
+
+    res.send(true);
 });
 
 export default router;

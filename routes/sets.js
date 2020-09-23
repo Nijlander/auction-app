@@ -9,22 +9,30 @@ const sets = [
         name: "ARC-170 Starfighter",
         release: 2010,
         parts: 396,
-        theme: "Star Wars"
-
+        theme: "Star Wars",
+        price: 125,
+        bids: [],
+        end: 1600848835385
     },
     {
         id: 2,
         name: "AT-AT",
         release: 2020,
         parts: 1267,
-        theme: "Star Wars"
+        theme: "Bionicle",
+        price: 80,
+        bids: [],
+        end: 1600848835385
     },
     {
         id: 3,
         name: "4x4 X-treme Off-Roader",
         release: 2019,
         parts: 958,
-        theme: "Technic"
+        theme: "Technic",
+        price: 250,
+        bids: [],
+        end: 1600848835385
     }
 ];
 
@@ -36,13 +44,44 @@ const schema = Joi.object({
     name: Joi.string().required(),
     release: Joi.number().required(),
     parts: Joi.number().required(),
-    theme: Joi.string().required()
+    theme: Joi.string().required(),
+    price: Joi.number().required(),
+    bids: Joi.array(),
+    end: Joi.date().required()
 });
 
 /**
  * route handler for GET /api/sets
  */
 router.get('/api/sets', (req, res) => {
+    const filteredResult = [];
+
+    if (req.query.search) {
+        for (let i = 0; i < sets.length; i++) {
+            if (sets[i].name.toLowerCase().includes(req.query.search.toLowerCase())) {
+                filteredResult.push(sets[i]);
+            }
+        }
+        res.send(filteredResult);
+        return;
+    } else if (req.query.theme) {
+        for (let i = 0; i < sets.length; i++) {
+            if (sets[i].theme.toLowerCase() === req.query.theme.toLowerCase()) {
+                filteredResult.push(sets[i]);
+            }
+        }
+        res.send(filteredResult);
+        return;
+    } else if (req.query.release) {
+        for (let i = 0; i < sets.length; i++) {
+            if (sets[i].release === parseInt(req.query.release)) {
+                filteredResult.push(sets[i]);
+            }
+        }
+        res.send(filteredResult);
+        return;
+    }
+
     res.send(sets);
 });
 
@@ -76,7 +115,10 @@ router.post('/api/sets', (req, res) => {
         name: value.name,
         release: value.release,
         parts: value.parts,
-        theme: value.theme
+        theme: value.theme,
+        price: value.price,
+        bids: [],
+        end: value.end
     };
 
     sets.push(set);
@@ -105,6 +147,9 @@ router.put('/api/sets/:id', (req, res) => {
     set.release = value.release;
     set.parts = value.parts;
     set.theme = value.theme;
+    set.price = value.price;
+    set.bids = value.bids;
+    set.end = value.end;
 
     res.send(set);
 });

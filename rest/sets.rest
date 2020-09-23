@@ -1,3 +1,15 @@
+GET http://localhost:3000/api/sets?release=2019
+Accept: application/json
+
+###
+GET http://localhost:3000/api/sets?theme=Bionicle
+Accept: application/json
+
+###
+GET http://localhost:3000/api/sets?search=arc
+Accept: application/json
+
+###
 POST http://localhost:3000/api/sets
 Content-Type: application/json
 
@@ -5,7 +17,10 @@ Content-Type: application/json
   "name": "New set",
   "release": 2020,
   "parts": 1000,
-  "theme": "Star Wars"
+  "theme": "Star Wars",
+  "price": 300,
+  "bids": [],
+  "end": 1600848835385
 }
 
 ###
@@ -24,7 +39,10 @@ Content-Type: application/json
   "name": "Updated set",
   "release": 2020,
   "parts": 1000,
-  "theme": "Star Wars"
+  "theme": "Star Wars",
+  "price": 100,
+  "bids": [],
+  "end": 1600848835388
 }
 
 ###
