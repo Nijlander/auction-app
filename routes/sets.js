@@ -12,6 +12,7 @@ const sets = [
         theme: "Star Wars",
         price: 125,
         bids: [],
+        sellerId: 1,
         end: 1600848835385
     },
     {
@@ -22,6 +23,7 @@ const sets = [
         theme: "Bionicle",
         price: 80,
         bids: [],
+        sellerId: 1,
         end: 1600848835385
     },
     {
@@ -32,6 +34,7 @@ const sets = [
         theme: "Technic",
         price: 250,
         bids: [],
+        sellerId: 1,
         end: 1600848835385
     }
 ];
@@ -47,6 +50,7 @@ const schema = Joi.object({
     theme: Joi.string().required(),
     price: Joi.number().required(),
     bids: Joi.array(),
+    sellerId: Joi.number().required(),
     end: Joi.date().required()
 });
 
@@ -117,6 +121,7 @@ router.post('/api/sets', (req, res) => {
         parts: value.parts,
         theme: value.theme,
         price: value.price,
+        sellerId: value.sellerId,
         bids: [],
         end: value.end
     };
@@ -149,6 +154,7 @@ router.put('/api/sets/:id', (req, res) => {
     set.theme = value.theme;
     set.price = value.price;
     set.bids = value.bids;
+    set.sellerId = value.sellerId;
     set.end = value.end;
 
     res.send(set);

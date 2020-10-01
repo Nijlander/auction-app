@@ -8,28 +8,19 @@ const users = [
         id: 1,
         username: "admin1",
         password: "password1",
-        email: "jrnijland1@gmail.com",
-        currentAuctions: [],
-        soldAuctions: [],
-        wonAuctions: []
+        email: "jrnijland1@gmail.com"
     },
     {
-        isd: 2,
+        id: 2,
         username: "admin2",
         password: "password2",
-        email: "jrnijland1@gmail.com",
-        currentAuctions: [],
-        soldAuctions: [],
-        wonAuctions: []
+        email: "jrnijland1@gmail.com"
     },
     {
         id: 3,
         username: "admin3",
         password: "password3",
-        email: "jrnijland1@gmail.com",
-        currentAuctions: [],
-        soldAuctions: [],
-        wonAuctions: []
+        email: "jrnijland1@gmail.com"
     }
 ];
 
@@ -40,10 +31,7 @@ const users = [
 const schema = Joi.object({
     username: Joi.string().required().min(5),
     password: Joi.string().required(),
-    email: Joi.string().required().email(),
-    currentAuctions: Joi.array(),
-    soldAuctions: Joi.array(),
-    wonAuctions: Joi.array()
+    email: Joi.string().required().email()
 });
 
 /**
@@ -75,16 +63,14 @@ router.post('/api/users', (req, res) => {
 
     if (error) {
         res.status(400).send(error.message);
+        return;
     }
 
     const user = {
         id: users[users.length - 1].id + 1,
         username: value.username,
         password: value.password,
-        email: value.email,
-        currentAuctions: [],
-        soldAuctions: [],
-        wonAuctions: []
+        email: value.email
     }
 
     users.push(user);
